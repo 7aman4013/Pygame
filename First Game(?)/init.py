@@ -19,8 +19,8 @@ player_size = 10
 player_friction = 0.9
 player_speed = 150
 player_jump = 2000
-player_bounce = 0.0
-player_mouse_force = 20
+player_bounce = 0.4
+player_mouse_force = 50
 player_acc_loss_rate = 0.2
 
 mouse_held_down = False
@@ -43,7 +43,7 @@ while running:
     
     keys = pg.key.get_pressed()
 
-    if keys[K_w] and player_pos.y > HEIGHT - player_size * 1.1:
+    if keys[K_w] and player_pos.y > HEIGHT - player_size * (1 + player_bounce):
         player_vel.y -= player_jump
     if keys[K_s]:
         player_vel.y += player_speed
@@ -90,7 +90,6 @@ while running:
             start_pos = player_pos + direction * i
             end_pos = player_pos + direction * min(i + dashed_steps, length)
             pg.draw.line(screen, "black", start_pos, end_pos, 5)
-
 
     ###
 
